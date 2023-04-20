@@ -8,7 +8,7 @@
       <li>Roster.  Include movies or interactive models.  Ref unleashed website and smash bros roster list   -goji and iris</li>
       <li> before and after shots with slidey bar thingy  - christ</li>
       <li> dont have site as subsection of someone elses site - everyone</li>
-      <li>hide link to doom somewhere in the code.  -christ </li>
+      <li>hide link to doom somewhere in the code because.  -christ </li>
      </ul>
     
  </div>
