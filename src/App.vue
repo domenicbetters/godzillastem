@@ -1,15 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+   <div id="app">
+    
+    <h1>GODZILLA STEM WEBSITE MAIN PAGE YAY!!!!!</h1>
+
+    <router-link :to="{name: 'DesiresPage'}"> <button>What do we want</button></router-link>
+    <router-link :to="{name: 'VibesPage'}"> <button>How it gonna look?</button></router-link>
+    <router-view />
+   
+    <div class = "bady">
+    <div class="imgbox"><img src="@/assets/godzilla.jpg" /></div>
+  </div>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    
   }
 }
 </script>
