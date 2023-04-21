@@ -1,6 +1,7 @@
 import DesiresPage from "@/views/DesiresPage.vue"
 import VibesPage from "@/views/VibesPage.vue"
 import ControllerPage from "@/views/ControllerPage.vue"
+import SliderPage from "@/views/SliderPage.vue"
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -37,6 +38,11 @@ const routes = [
         path: "/godzillastem/controller/ps2",
         name: "ControllerPagePS2",
         component: ControllerPage,
+      },
+      {
+        path: "/godzillastem/sliderdemo",
+        name: "SliderPage",
+        component: SliderPage,
       },
 
 ]
