@@ -27,19 +27,16 @@ const routes = [
         path: "/godzillastem/controller/generic",
         name: "ControllerPageGeneric",
         component: ControllerPage,
-        props: {type: require("@/assets/generic.png")}
       },
       {
         path: "/godzillastem/controller/xbox",
         name: "ControllerPageXbox",
         component: ControllerPage,
-        props: {type: require("@/assets/xbox.jpg")}
       },
       {
         path: "/godzillastem/controller/ps2",
         name: "ControllerPagePS2",
         component: ControllerPage,
-        props: {type: require("@/assets/ps2.png")}
       },
 
 ]
