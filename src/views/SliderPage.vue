@@ -6,6 +6,7 @@
 
      <ImgComparisonSlider>
     <!-- eslint-disable -->
+    <img slot="handle" class = "sliderbutton" src="@/assets/sliderbutton.png" />
     <img
       slot="first"
       style="width: 100%"
@@ -68,6 +69,11 @@ img-comparison-slider {
     --divider-width: 2px;
     --divider-color: #c0c0c0;
     --default-handle-color: red;
+  }
+
+  .sliderbutton {
+    width: 40px;
+    height: 40px;
   }
 
 </style>
