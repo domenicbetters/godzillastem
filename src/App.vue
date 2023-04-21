@@ -5,7 +5,8 @@
 
     <router-link :to="{name: 'DesiresPage'}"> <button>What do we want</button></router-link>
     <router-link :to="{name: 'VibesPage'}"> <button>How it gonna look?</button></router-link>
-    <router-view />
+    <router-link :to="{name: 'ControllerPageGeneric'}"> <button>Controller?</button></router-link>
+    <router-view :key="$route.fullPath"  />
    
     <div class = "bady">
     <div class="imgbox"><img src="@/assets/godzilla.jpg" /></div>

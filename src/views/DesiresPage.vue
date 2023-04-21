@@ -9,6 +9,7 @@
       <li> before and after shots with slidey bar thingy  - christ</li>
       <li> dont have site as subsection of someone elses site - everyone</li>
       <li>hide link to doom somewhere in the code because.  -christ </li>
+      <li> controls explanation alogn with button layout for modern controller options - zane</li>
      </ul>
     
  </div>
