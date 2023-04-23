@@ -2,6 +2,7 @@ import DesiresPage from "@/views/DesiresPage.vue"
 import VibesPage from "@/views/VibesPage.vue"
 import ControllerPage from "@/views/ControllerPage.vue"
 import SliderPage from "@/views/SliderPage.vue"
+import JukeBox from "@/views/JukeBox.vue"
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -44,6 +45,12 @@ const routes = [
         name: "SliderPage",
         component: SliderPage,
       },
+      {
+        path: "/godzillastem/jukebox",
+        name: "JukeBox",
+        component: JukeBox,
+      },
+
 
 ]
 

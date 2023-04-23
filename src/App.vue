@@ -7,6 +7,7 @@
     <router-link :to="{name: 'VibesPage'}"> <button>How it gonna look?</button></router-link>
     <router-link :to="{name: 'ControllerPageGeneric'}"> <button>Controller?</button></router-link>
     <router-link :to="{name: 'SliderPage'}"> <button>Check out the slider mockup</button></router-link>
+    <router-link :to="{name: 'JukeBox'}"> <button>jukebox test</button></router-link>
     <router-view :key="$route.fullPath"  />
    
     <div class = "bady">
