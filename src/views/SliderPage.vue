@@ -18,7 +18,7 @@
       src="@/assets/after.png"
     />
     <!-- eslint-enable -->
-  </ImgComparisonSlider>
+    </ImgComparisonSlider>
 
 
     

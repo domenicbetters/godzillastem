@@ -2,14 +2,14 @@
     <div id="app">
      
      <h1>Juke Box test</h1>
-<h3>now playing :   {{this.songname[0]}}</h3>
+<h3>now playing :   {{this.songname}} </h3>
 
-     <SongButton @click="changesong(song.linky), changetracktext(song.title)" :key = "song.title" v-for="(song) in songs" :song="song"/>
+     <SongButton @click="changesong(song.linky, song.title)" :key = "song.title" v-for="(song) in songs" :song="song"/>
 
      <button @click="playall()">play all</button>
 
 
-     <h3>{{ this.songname }}</h3>
+     <!-- <h3>{{ this.playlists }}</h3> -->
 
 
      <div class = "recordbox">
@@ -28,11 +28,11 @@
                         </label>
                 </div>
 
-
+                <PlayList @delete-song="deletesong" :key = "playlist.id" v-for="(playlist) in playlists" :song="playlist"/>
 
 
    
-     <audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src="this.songlink[0]"> </audio> 
+     <audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src="this.songlink"> </audio> 
 
 
     
@@ -44,66 +44,90 @@
 
  import songlist from "@/assets/songs.json"
  import SongButton from "@/components/SongButton.vue"
+ import PlayList from "@/components/PlayList.vue"
  
  export default {
    name: 'JukeBox',
    components: {
-     SongButton
+     SongButton,
+     PlayList
    },
    data() {
     return {
-      songlink: [],
-      songname: [],
+      songlink: '',
+      songname: '',
+      playlists: [],
       tracky: 0,
       songs: songlist,
+      playlistsid: 0
     }
    },
  
 
    methods: {
-    changesong(songlinky) {
-           this.songlink.push(songlinky)
-           if(this.songlink.length == 1 ){
-           this.tracky = this.tracky + 1
-           }
+    changesong(songlinky, songname) {
+      this.playlistsid ++
+      this.playlists.push({ id: this.playlistsid, link: songlinky, title: songname})
+      if(this.playlists.length == 1 ){
+      this.songlink = this.playlists[0].link 
+      this.songname = this.playlists[0].title
+      this.tracky = this.tracky + 1
+      console.log(this.playlists)
+      }
     },
-    togglePlay() {
-  var myAudio = document.getElementById("audioplayer");
-  return myAudio.paused? myAudio.play() : myAudio.pause();
-},
 
-    changetracktext(songname) {
-        this.songname.push(songname)
+    togglePlay() {
+      var myAudio = document.getElementById("audioplayer");
+      return myAudio.paused? myAudio.play() : myAudio.pause();
     },
 
     playall() {
       var songs = this.songs
       songs.forEach(song=>{
-        console.log(song.linky)
-        this.changesong(song.linky)
-        this.changetracktext(song.title)
+        this.changesong(song.linky, song.title)
       })
-        
-       
-     
     },
+
     checkplay() {
         let inputs = document.getElementById("btnControl");
         inputs.checked = true;
     },
+
     checkpause() {
-            let inputs = document.getElementById("btnControl");
+        let inputs = document.getElementById("btnControl");
         inputs.checked = false;
     },
 
     itsover(){
-      this.songlink.shift()
-      this.songname.shift()
-      this.tracky = this.tracky + 1
-      console.log(this.songlink.length)
+      this.playlists.shift()
+      if (this.playlists.length == 0){
+      this.songlink = ""
+      this.songname = ""
+      this.tracky = this.tracky + 1}
+      else {
+      this.songlink=this.playlists[0].link
+      this.songname=this.playlists[0].title 
+      this.tracky = this.tracky + 1 }
     },
 
+    deletesong(idnum) {
    
+      if(this.playlists[0].id == idnum){
+      this.playlists = this.playlists.filter((playlist) => playlist.id !== idnum)
+        if (this.playlists.length == 0){
+        this.songlink = ""
+        this.songname = ""
+        this.tracky = this.tracky + 1}
+        else {
+        this.songlink=this.playlists[0].link
+        this.songname=this.playlists[0].title 
+        this.tracky = this.tracky + 1 }
+      }
+
+      else {
+        this.playlists = this.playlists.filter((playlist) => playlist.id !== idnum)
+      }
+    }
    },
  }
 
