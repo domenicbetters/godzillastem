@@ -7,6 +7,7 @@
      <SongButton @click="changesong(song.linky, song.title)" :key = "song.title" v-for="(song) in songs" :song="song"/>
 
      <button @click="playall()">play all</button>
+     <button @click="shuffle(this.playlists)">shuffle the whole thang</button>
 
 
      <!-- <h3>{{ this.playlists }}</h3> -->
@@ -32,7 +33,7 @@
 
 
    
-     <audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src="this.songlink"> </audio> 
+     <audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src=this.songlink> </audio> 
 
 
     
@@ -42,7 +43,6 @@
  <script>
 
 
- import songlist from "@/assets/songs.json"
  import SongButton from "@/components/SongButton.vue"
  import PlayList from "@/components/PlayList.vue"
  
@@ -58,23 +58,55 @@
       songname: '',
       playlists: [],
       tracky: 0,
-      songs: songlist,
+      songs: [
+    {
+        title: "Swinging bionic boi", 
+        linky: require("@/assets/g2.mp3")
+    },
+    {
+        title: "BioWars",
+        linky: require("@/assets/g1.mp3")
+    }
+],
       playlistsid: 0
     }
    },
  
 
    methods: {
-    changesong(songlinky, songname) {
+    async changesong(songlinky, songname) {
       this.playlistsid ++
       this.playlists.push({ id: this.playlistsid, link: songlinky, title: songname})
       if(this.playlists.length == 1 ){
-      this.songlink = this.playlists[0].link 
+      this.songlink = this.playlists[0].link
+      console.log(this.songlink)
       this.songname = this.playlists[0].title
       this.tracky = this.tracky + 1
-      console.log(this.playlists)
       }
     },
+
+    shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+        this.songlink=this.playlists[0].link
+        this.songname=this.playlists[0].title 
+        this.tracky = this.tracky + 1 
+  return array;
+  
+},
+
+
 
     togglePlay() {
       var myAudio = document.getElementById("audioplayer");
@@ -113,7 +145,7 @@
     deletesong(idnum) {
    
       if(this.playlists[0].id == idnum){
-      this.playlists = this.playlists.filter((playlist) => playlist.id !== idnum)
+        this.playlists = this.playlists.filter((playlist) => playlist.id !== idnum)
         if (this.playlists.length == 0){
         this.songlink = ""
         this.songname = ""
