@@ -6,8 +6,8 @@
 
      <SongButton @click="changesong(song.linky, song.title)" :key = "song.title" v-for="(song) in songs" :song="song"/>
 
-     <button @click="playall()">play all</button>
-     <button @click="shuffle(this.playlists)">shuffle the whole thang</button>
+     <FuncButton @click="playall()" title = "Play All"/>
+     <FuncButton @click="shuffle(this.playlists)" title = "Shuffle that Shit" />
 
 
      <!-- <h3>{{ this.playlists }}</h3> -->
@@ -28,9 +28,9 @@
                             </div>
                         </label>
                 </div>
-
-                <PlayList @delete-song="deletesong" :key = "playlist.id" v-for="(playlist) in playlists" :song="playlist"/>
-
+    <div class = "playlistwindow">
+      <PlayList @delete-song="deletesong" :key = "playlist.id" v-for="(playlist, i) in playlists" :song="playlist" :songorder = "i + 1"  />
+    </div>
 
    
      <audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src=this.songlink> </audio> 
@@ -44,12 +44,14 @@
 
 
  import SongButton from "@/components/SongButton.vue"
+ import FuncButton from "@/components/FuncButton.vue"
  import PlayList from "@/components/PlayList.vue"
  
  export default {
    name: 'JukeBox',
    components: {
      SongButton,
+     FuncButton,
      PlayList
    },
    data() {
@@ -171,6 +173,9 @@ img {
   object-fit: cover;
 }
 
+.recordbox {
+  display: none;
+}
 
 
 .recordbox{
@@ -231,6 +236,14 @@ img {
   to {
     transform: rotate(359deg);
   }
+  }
+
+  .playlistwindow {
+    border:5px solid gold;
+    height: 300px;
+    width: 100ch;
+    overflow-y:scroll;
+
   }
 
     

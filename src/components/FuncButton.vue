@@ -1,16 +1,16 @@
 <template>
-   <button>{{ song.title }}</button>
+   <button>{{ title }}</button>
 </template>
  
  <script>
  
  export default {
-   name: 'SongButton',
+   name: 'FuncButton',
    components: {
      
    },
    props: {
-    song: Object
+    title: String
    }
  }
  </script>
