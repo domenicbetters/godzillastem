@@ -62,12 +62,57 @@
       tracky: 0,
       songs: [
     {
-        title: "Swinging bionic boi", 
-        linky: require("@/assets/g2.mp3")
+        title: "The Swingin' Bionic Monster", 
+        linky: require("@/assets/swinging.mp3")
     },
     {
-        title: "BioWars",
-        linky: require("@/assets/g1.mp3")
+        title: "Bio Wars",
+        linky: require("@/assets/biowars.mp3")
+    },
+    {
+        title: "Vast Mysteries of the Ocean",
+        linky: require("@/assets/ocean.mp3")
+    },
+    {
+        title: "Prepare for Attack",
+        linky: require("@/assets/prepareforattack.mp3")
+    },
+    {
+        title: "on va s'écraser et brûler",
+        linky: require("@/assets/bruler.mp3")
+    },
+    {
+        title: "le bâtiment du capitole est en danger!",
+        linky: require("@/assets/capitol.mp3")
+    },
+    {
+        title: "la dernière bataille de tokyo contre les monstres",
+        linky: require("@/assets/battledetokyo.mp3")
+    },
+    {
+        title: "la guerre est un enfer, mais ça doit se faire",
+        linky: require("@/assets/guere.mp3")
+    },
+
+    {
+        title: "godzilla vs the self defense forcese",
+        linky: require("@/assets/sdf.mp3")
+    },
+    {
+        title: "Destroy All Monsters",
+        linky: require("@/assets/dam.mp3")
+    },
+    {
+        title: "Deathly Confrontation",
+        linky: require("@/assets/confrontation.mp3")
+    },
+    {
+        title: "citation de mitsubishi pavilion I 'volcano'",
+        linky: require("@/assets/volcano.mp3")
+    },
+    {
+        title: "a great tragedy has befallen manhattan",
+        linky: require("@/assets/greattragedy.mp3")
     }
 ],
       playlistsid: 0
@@ -80,11 +125,14 @@
       this.playlistsid ++
       this.playlists.push({ id: this.playlistsid, link: songlinky, title: songname})
       if(this.playlists.length == 1 ){
+      this.switcheroo()
+      }
+    },
+
+    switcheroo(){
       this.songlink = this.playlists[0].link
-      console.log(this.songlink)
       this.songname = this.playlists[0].title
       this.tracky = this.tracky + 1
-      }
     },
 
     shuffle(array) {
@@ -101,9 +149,7 @@
     [array[currentIndex], array[randomIndex]] = [
       array[randomIndex], array[currentIndex]];
   }
-        this.songlink=this.playlists[0].link
-        this.songname=this.playlists[0].title 
-        this.tracky = this.tracky + 1 
+  this.switcheroo()
   return array;
   
 },
@@ -139,9 +185,7 @@
       this.songname = ""
       this.tracky = this.tracky + 1}
       else {
-      this.songlink=this.playlists[0].link
-      this.songname=this.playlists[0].title 
-      this.tracky = this.tracky + 1 }
+        this.switcheroo() }
     },
 
     deletesong(idnum) {
@@ -153,9 +197,7 @@
         this.songname = ""
         this.tracky = this.tracky + 1}
         else {
-        this.songlink=this.playlists[0].link
-        this.songname=this.playlists[0].title 
-        this.tracky = this.tracky + 1 }
+          this.switcheroo()}
       }
 
       else {
