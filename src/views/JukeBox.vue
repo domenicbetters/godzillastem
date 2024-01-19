@@ -1,11 +1,30 @@
 <template>
     <div id="app">
+      <h1>STEM JUKE BOX</h1> 
+    <div class = "thebody">
+      
+      <div class = "leftside">
+        <div class = "recordbox">
+          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
+          <label class="btn" for="btnControl">
+            <div class = "record" :style = "this.record">
+              <div class = "tracktext" id = "trackname">
+                                   
+              </div>
+              <div class = "artisttext" id = "artistname">
+                                  
+              </div>                 
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="rightside">
      
-     <h1>Juke Box test</h1>
-<h3>now playing :   {{this.songname}} </h3>
-
+      <h3>now playing :   {{this.songname}} </h3>
+     <div class = "buttonbox">
      <SongButton @click="changesong(song.linky, song.title)" :key = "song.title" v-for="(song) in songs" :song="song"/>
-
+     </div>
      <FuncButton @click="playall()" title = "Play All"/>
      <FuncButton @click="shuffle(this.playlists)" title = "Shuffle that Shit" />
 
@@ -13,21 +32,7 @@
      <!-- <h3>{{ this.playlists }}</h3> -->
 
 
-     <div class = "recordbox">
-                    <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-                        <label class="btn" for="btnControl">
-                            <div class = "record">
-                                <div class = "tracktext" id = "trackname">
-                                   
-                                </div>
-                                 <div class = "artisttext" id = "artistname">
-                                  
-                                </div>
-                                
-                                
-                            </div>
-                        </label>
-                </div>
+    
     <div class = "playlistwindow">
       <PlayList @delete-song="deletesong" :key = "playlist.id" v-for="(playlist, i) in playlists" :song="playlist" :songorder = "i + 1"  />
     </div>
@@ -35,7 +40,8 @@
    
      <audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src=this.songlink> </audio> 
 
-
+    </div>
+    </div>
     
  </div>
  </template>
@@ -56,6 +62,7 @@
    },
    data() {
     return {
+      record: '',
       songlink: '',
       songname: '',
       playlists: [],
@@ -171,11 +178,13 @@
     checkplay() {
         let inputs = document.getElementById("btnControl");
         inputs.checked = true;
+        this.record = 'animation: spin 4s linear infinite;'
     },
 
     checkpause() {
         let inputs = document.getElementById("btnControl");
         inputs.checked = false;
+        this.record = ''
     },
 
     itsover(){
@@ -210,27 +219,53 @@
  </script>
 
  <style>
+ .thebody {
+  width: 100vw;
+  height:fit-content;
+  border: 5px pink solid;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+ }
+
+ .leftside {
+  width: 275px;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  
+  border: 5px solid rgb(164, 0, 80);
+ }
+
+ .rightside {
+  width:fit-content;
+  border: 5px solid green;
+  display: flex;
+  flex-direction: column;
+ }
+
 img {
   width: 95vw;
   object-fit: cover;
 }
 
-.recordbox {
-  display: none;
+.buttonbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height:400px;
+  overflow-y: scroll;
 }
 
-
 .recordbox{
-     clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+     clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
      margin: 0;
-     position: absolute;
-     bottom: -273px;
-     left: 350px;
-     overflow: hidden;
+     /* position: relative;
+     left: -65%; */
      z-index:6;
-     
-
-     
+     display: flex;
+     justify-self: left;
      
     }
   
@@ -248,11 +283,12 @@ img {
     }
       #btnControl {
         border:0px;
+        display:none;
       }
       #btnControl:checked ~ label div {
           transform-origin: center center;
-        animation: spin 4s linear infinite;
         border:0px;
+
       }
      #btnControl:active ~label div {
           border:0px;
@@ -262,7 +298,7 @@ img {
       }
       
  
-
+  /* animation: spin 4s linear infinite; */
     @keyframes spin {
       from {
     transform: rotate(0deg);
