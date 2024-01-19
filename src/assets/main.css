@@ -1,0 +1,23 @@
+
+  @font-face {
+    font-family: 'VHS';
+    src: local('VHS'),
+    url(./VCR_OSD_MONO_1.001.ttf);
+}
+
+h2{
+    font-family:'VHS';
+    color: #138b5a
+}
+h3{
+    font-family:'VHS';
+    color: #138b5a
+}
+h4{
+    font-family:'VHS';
+    color: #138b5a
+}
+p{
+    font-family:'VHS';
+    color: #138b5a
+}

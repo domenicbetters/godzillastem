@@ -21,9 +21,18 @@
 
       <div class="rightside">
      
-      <h3>now playing :   {{this.songname}} </h3>
+      <div id = "nowplayingbox" class = "nowplayingbox">
+        <h2>{{this.songname}}</h2>
+        <h3>{{this.songdesc}}</h3>
+        <p>Composer:{{this.songcomp}} | Arranger:{{this.songarr}} | Vocals:{{this.songvoc}} | Lyrics:{{this.songlyrwr}}</p>
+        <h4 v-show="!this.lyricshown" @click="dropdown()">Click Here For Lyrics</h4><h4 v-show="this.lyricshown" @click="pickup()">Click Here To Hide Lyrics</h4>
+        <div class = "lyricbox">
+          <p>{{ this.songlyr }}</p>
+        </div>
+
+      </div>
      <div class = "buttonbox">
-     <SongButton @click="changesong(song.linky, song.title)" :key = "song.title" v-for="(song) in songs" :song="song"/>
+     <SongButton @click="changesong(song.linky, song.title, song.desc, song.comp, song.arr, song.voc, song.lyrwr, song.lyr)" :key = "song.title" v-for="(song) in songs" :song="song"/>
      </div>
      <FuncButton @click="playall()" title = "Play All"/>
      <FuncButton @click="shuffle(this.playlists)" title = "Shuffle that Shit" />
@@ -62,14 +71,27 @@
    },
    data() {
     return {
+      lyricshown: false,
       record: '',
       songlink: '',
-      songname: '',
+      songname: '------------',
+      songdesc: '------------',
+      songcomp: '----',
+      songarr: '----',
+      songvoc: '----',
+      songlyrwr: '----',
+      songlyr: '------------',
       playlists: [],
       tracky: 0,
       songs: [
     {
-        title: "The Swingin' Bionic Monster", 
+        title: "The Swingin' Bionic Monster",
+        desc: "absolute banger",
+        comp: "that one guy  |  ",
+        arr: "Zane A Goen  |  ",
+        voc: "that guy in hawaiin shirt saying uh oh  |  ", 
+        lyrwr: "chubawumba",
+        lyr: "I get knocked down but i get up again youre never gonna keep me down",
         linky: require("@/assets/swinging.mp3")
     },
     {
@@ -128,21 +150,43 @@
  
 
    methods: {
-    async changesong(songlinky, songname) {
+    async changesong(songlinky, songname, songdesc, songcomp, songarr, songvoc, songlyrwr, songlyr) {
       this.playlistsid ++
-      this.playlists.push({ id: this.playlistsid, link: songlinky, title: songname})
+      this.playlists.push({ id: this.playlistsid, link: songlinky, title: songname, desc: songdesc, comp: songcomp, arr: songarr, voc: songvoc, lyrwr: songlyrwr, lyr: songlyr})
       if(this.playlists.length == 1 ){
       this.switcheroo()
       }
     },
 
+    dropdown(){
+      document.getElementById('nowplayingbox').classList.remove('lyricup')
+      document.getElementById('nowplayingbox').classList.add('lyricdrop')
+      this.lyricshown = !this.lyricshown
+    },
+
+    pickup(){
+      document.getElementById('nowplayingbox').classList.remove('lyricdrop')
+      document.getElementById('nowplayingbox').classList.add('lyricup')
+      this.lyricshown = !this.lyricshown
+    },
+
+
+
     switcheroo(){
       this.songlink = this.playlists[0].link
       this.songname = this.playlists[0].title
+      this.songdesc = this.playlists[0].desc
+      this.songcomp = this.playlists[0].comp
+      this.songarr= this.playlists[0].arr
+      this.songvoc = this.playlists[0].voc
+      this.songlyrwr = this.playlists[0].lyrwr
+      this.songlyr = this.playlists[0].lyr
       this.tracky = this.tracky + 1
     },
 
     shuffle(array) {
+
+  if (array.length != 0){
   let currentIndex = array.length,  randomIndex;
 
   // While there remain elements to shuffle.
@@ -158,7 +202,7 @@
   }
   this.switcheroo()
   return array;
-  
+}    
 },
 
 
@@ -171,7 +215,7 @@
     playall() {
       var songs = this.songs
       songs.forEach(song=>{
-        this.changesong(song.linky, song.title)
+        this.changesong(song.linky, song.title, song.desc, song.comp, song.arr, song.voc, song.lyrwr, song.lyr)
       })
     },
 
@@ -191,7 +235,13 @@
       this.playlists.shift()
       if (this.playlists.length == 0){
       this.songlink = ""
-      this.songname = ""
+      this.songname = "------------"
+      this.songdesc = "------------"
+      this.songcomp = "----"
+      this.songarr = "----"
+      this.songvoc = "----"
+      this.songlyrwr = "----"
+      this.songlyr = "------------"
       this.tracky = this.tracky + 1}
       else {
         this.switcheroo() }
@@ -203,7 +253,13 @@
         this.playlists = this.playlists.filter((playlist) => playlist.id !== idnum)
         if (this.playlists.length == 0){
         this.songlink = ""
-        this.songname = ""
+        this.songname = "------------"
+        this.songdesc = "------------"
+        this.songcomp = "----"
+        this.songarr = "----"
+        this.songvoc = "----"
+        this.songlyrwr = "----"
+        this.songlyr = "------------"
         this.tracky = this.tracky + 1}
         else {
           this.switcheroo()}
@@ -219,14 +275,47 @@
  </script>
 
  <style>
+  h2 {
+    margin:12px;
+    font-family: "VHS";
+  }
+  h3 {
+    margin:12px;
+  }
+  h4{
+    margin: 12px;
+  }
+
  .thebody {
-  width: 100vw;
+  width: 95vw;
+  margin:auto;
   height:fit-content;
-  border: 5px pink solid;
+  border: 7px solid #0e3a28;
+  border-radius: 15px;
   display:flex;
   flex-direction: row;
   justify-content: space-between;
   overflow: hidden;
+ }
+
+ .nowplayingbox {
+  border: 2px solid #138b5a;
+  width: 75%;
+  height: 180px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  margin: 15px;
+  box-shadow: #0e3a28 0 0 15px 8px;
+ }
+ .lyricbox {
+  border: 1px solid #29c786;
+  width: 85%;
+  height: 220px;
+  overflow-y: scroll;
+  margin-top: 8px;
  }
 
  .leftside {
@@ -234,15 +323,13 @@
   display: flex;
   flex-direction: row;
   justify-content: right;
-  
-  border: 5px solid rgb(164, 0, 80);
  }
 
  .rightside {
   width:fit-content;
-  border: 5px solid green;
   display: flex;
   flex-direction: column;
+  align-items: center;
  }
 
 img {
@@ -269,6 +356,13 @@ img {
      
     }
   
+    .lyricdrop {
+      animation: lyricdrop 1s ease-in-out forwards;
+    }
+    .lyricup {
+      animation: lyricup 1s ease-in-out forwards;
+    }
+
     .record{
         display: flex;
         justify-content: center;
@@ -316,6 +410,39 @@ img {
   }
   }
 
+  @keyframes lyricdrop{
+      from {
+    height: 180px;
+  }
+  to {
+    height: 420px;
+  }
+  }
+  @-webkit-keyframes lyricdrop {
+    from {
+    height: 180px;
+  }
+  to {
+    height: 420px;
+  }
+  }
+  @keyframes lyricup{
+      from {
+    height: 420px;
+  }
+  to {
+    height: 180px;
+  }
+  }
+  @-webkit-keyframes lyricup {
+    from {
+    height: 420px;
+  }
+  to {
+    height: 180px;
+  }
+  }
+
   .playlistwindow {
     border:5px solid gold;
     height: 300px;
@@ -323,6 +450,8 @@ img {
     overflow-y:scroll;
 
   }
+
+ 
 
     
    
