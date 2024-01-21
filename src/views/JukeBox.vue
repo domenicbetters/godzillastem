@@ -4,43 +4,46 @@
     <div class = "thebody">
       
       <div class = "leftside">
-        <div class = "recordbox">
-          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-          <label class="btn" for="btnControl">
-            <div class = "record" :style = "this.record">
-            </div>
-          </label>
-        </div>
+        <div class = cap></div>
+        <div class = "hotbars"> 
+          <div class = "recordbox">
+            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
+            <label class="btn" for="btnControl">
+              <div class = "record" :style = "this.record">
+              </div>
+            </label>
+          </div>
 
-        <div class = "recordbox">
-          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-          <label class="btn" for="btnControl">
-            <div class = "record" :style = "this.record">
-            </div>
-          </label>
+          <div class = "recordbox">
+            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
+            <label class="btn" for="btnControl">
+              <div class = "record" :style = "this.record">
+              </div>
+            </label>
+          </div>
+          <div class = "recordbox">
+            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
+            <label class="btn" for="btnControl">
+              <div class = "record" :style = "this.record">
+              </div>
+            </label>
+          </div>
+          <div class = "recordbox">
+            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
+            <label class="btn" for="btnControl">
+              <div class = "record" :style = "this.record">
+              </div>
+            </label>
+          </div>
+          <div class = "recordbox">
+            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
+            <label class="btn" for="btnControl">
+              <div class = "record" :style = "this.record">
+              </div>
+            </label>
+          </div>
         </div>
-        <div class = "recordbox">
-          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-          <label class="btn" for="btnControl">
-            <div class = "record" :style = "this.record">
-            </div>
-          </label>
-        </div>
-        <div class = "recordbox">
-          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-          <label class="btn" for="btnControl">
-            <div class = "record" :style = "this.record">
-            </div>
-          </label>
-        </div>
-        <div class = "recordbox">
-          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-          <label class="btn" for="btnControl">
-            <div class = "record" :style = "this.record">
-            </div>
-          </label>
-        </div>
-
+        <div class = cap></div>
       </div>
 
       <div class="rightside">
@@ -96,7 +99,7 @@
    data() {
     return {
       lyricshown: false,
-      record: '',
+      record: 'background: rgb(0,28,16); background: linear-gradient(90deg, rgba(0,28,16,1) 0%, rgba(70,79,75,1) 50%, rgba(0,28,16,1) 100%);',
       songlink: '',
       songname: '------------',
       songdesc: '------------',
@@ -111,9 +114,9 @@
     {
         title: "The Swingin' Bionic Monster",
         desc: "absolute banger",
-        comp: "that one guy  |  ",
-        arr: "Zane A Goen  |  ",
-        voc: "that guy in hawaiin shirt saying uh oh  |  ", 
+        comp: "that one guy",
+        arr: "Zane A Goen",
+        voc: "that guy in hawaiin shirt", 
         lyrwr: "chubawumba",
         lyr: "I get knocked down but i get up again youre never gonna keep me down",
         linky: require("@/assets/swinging.mp3")
@@ -246,13 +249,13 @@
     checkplay() {
         let inputs = document.getElementById("btnControl");
         inputs.checked = true;
-        this.record = 'animation: spin .2s linear infinite;'
+        this.record = 'animation: spin .4s ease-in-out infinite;'
     },
 
     checkpause() {
         let inputs = document.getElementById("btnControl");
         inputs.checked = false;
-        this.record = ''
+        this.record = 'background: rgb(0,28,16); background: linear-gradient(90deg, rgba(0,28,16,1) 0%, rgba(70,79,75,1) 50%, rgba(0,28,16,1) 100%);'
     },
 
     itsover(){
@@ -324,7 +327,7 @@
 
  .nowplayingbox {
   border: 2px solid #138b5a;
-  width: 75%;
+  width: 95%;
   height: 180px;
   overflow: hidden;
   display: flex;
@@ -343,14 +346,30 @@
  }
 
  .leftside {
-  width: 275px;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+ }
+
+ .cap{
+  background-image: url(../assets/caps.jpg);
+  background-size:100% 100% ;
+  z-index: 1;
+  width:100%;
+  height:50px;
+ }
+ .hotbars {
+  background-color: #202020;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
+  z-index: 9;
   justify-content: space-evenly;
  }
 
  .rightside {
-  width:fit-content;
+  width: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -371,8 +390,8 @@ img {
 
 .recordbox{
      margin: 0;
-     width:3%;
-     z-index:1;
+     width:13%;
+     z-index:10;
     }
   
     .lyricdrop {
@@ -386,10 +405,9 @@ img {
         width: 50%;
         height: 100%;
         margin: 0;
-        box-shadow: 0 0 20px 8px #2eb77e;
-        background-color: #f7fffc;
         margin-right: auto;
         margin-left: auto;
+        z-index: 19;
     }
       #btnControl {
         border:0px;
@@ -411,18 +429,28 @@ img {
   /* animation: spin 4s linear infinite; */
     @keyframes spin {
       from {
-    width:50%;
+    
+        background: rgb(14,58,40);
+        background: linear-gradient(90deg, rgba(14,58,40,1) 0%, rgba(255,255,255,1) 50%, rgba(14,58,40,1) 100%); 
+        box-shadow: 0 0 10px 8px rgb(14,58,40); 
   }
   to {
-    width:100%;
+    background: rgb(19,139,90);
+    background: linear-gradient(90deg, rgba(19,139,90,1) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 66%, rgba(19,139,90,1) 100%);
+    box-shadow: 0 0 20px 8px rgb(19,139,90);
   }
   }
   @-webkit-keyframes spin {
     from {
-    width:50%;
+   
+      background: rgb(14,58,40);
+      background: linear-gradient(90deg, rgba(14,58,40,1) 0%, rgba(255,255,255,1) 50%, rgba(14,58,40,1) 100%);
+      box-shadow: 0 0 10px 8px rgb(14,58,40);
   }
   to {
-    width:100%;
+    background: rgb(19,139,90);
+  background: linear-gradient(90deg, rgba(19,139,90,1) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 66%, rgba(19,139,90,1) 100%);
+    box-shadow: 0 0 20px 8px rgb(19,139,90);
   }
   }
 
