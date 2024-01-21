@@ -8,39 +8,15 @@
           <input @click="togglePlay()"  type="checkbox" id="btnControl" />
           <label class="btn" for="btnControl">
             <div class = "record" :style = "this.record">
+              <div class = "tracktext" id = "trackname">
+                                   
+              </div>
+              <div class = "artisttext" id = "artistname">
+                                  
+              </div>                 
             </div>
           </label>
         </div>
-
-        <div class = "recordbox">
-          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-          <label class="btn" for="btnControl">
-            <div class = "record" :style = "this.record">
-            </div>
-          </label>
-        </div>
-        <div class = "recordbox">
-          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-          <label class="btn" for="btnControl">
-            <div class = "record" :style = "this.record">
-            </div>
-          </label>
-        </div>
-        <div class = "recordbox">
-          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-          <label class="btn" for="btnControl">
-            <div class = "record" :style = "this.record">
-            </div>
-          </label>
-        </div>
-        <div class = "recordbox">
-          <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-          <label class="btn" for="btnControl">
-            <div class = "record" :style = "this.record">
-            </div>
-          </label>
-        </div>
-
       </div>
 
       <div class="rightside">
@@ -246,7 +222,7 @@
     checkplay() {
         let inputs = document.getElementById("btnControl");
         inputs.checked = true;
-        this.record = 'animation: spin .2s linear infinite;'
+        this.record = 'animation: spin 4s linear infinite;'
     },
 
     checkpause() {
@@ -346,7 +322,7 @@
   width: 275px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: right;
  }
 
  .rightside {
@@ -370,9 +346,14 @@ img {
 }
 
 .recordbox{
+     clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
      margin: 0;
-     width:3%;
-     z-index:1;
+     /* position: relative;
+     left: -65%; */
+     z-index:6;
+     display: flex;
+     justify-self: left;
+     
     }
   
     .lyricdrop {
@@ -383,13 +364,16 @@ img {
     }
 
     .record{
-        width: 50%;
-        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        background-image: url("@/assets/record.png");
+        width: 550px;
+        height: 550px;
+        background-size: cover;
         margin: 0;
-        box-shadow: 0 0 20px 8px #2eb77e;
-        background-color: #f7fffc;
-        margin-right: auto;
-        margin-left: auto;
+        overflow: hidden;
     }
       #btnControl {
         border:0px;
@@ -411,18 +395,18 @@ img {
   /* animation: spin 4s linear infinite; */
     @keyframes spin {
       from {
-    width:50%;
+    transform: rotate(0deg);
   }
   to {
-    width:100%;
+    transform: rotate(359deg);
   }
   }
   @-webkit-keyframes spin {
     from {
-    width:50%;
+    transform: rotate(0deg);
   }
   to {
-    width:100%;
+    transform: rotate(359deg);
   }
   }
 
