@@ -57,11 +57,12 @@
  }
 
  .button-box {
-  margin: 2px;
+  margin-top:5px;
+  margin-bottom: 5px;
   padding:10px;
   padding-right:0px;
   width:230px;
-  height: 60px;
+  height: 45px;
   overflow:hidden;
   display:flex;
   flex-direction: row;
@@ -69,7 +70,7 @@
   align-items: center;
   background: rgb(14,58,40);
   background: linear-gradient(180deg, rgba(14,58,40,0) 0%, rgba(14,58,40,0.40) 20%, rgba(41,199,134,0.6) 40%, rgba(38,182,123,0.6) 60%, rgba(14,58,40,0.40) 80%, rgba(14,58,40,0) 100%);
-  box-shadow: -6px 0 5px 2px white;
+  box-shadow: -6px 0 5px 2px rgba(255, 255, 255, 0.704);
  }
 
  p{

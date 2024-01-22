@@ -1,6 +1,5 @@
 <template>
     <div id="app">
-      <h1>STEM JUKE BOX</h1> 
     <div class = "thebody">
       
       <div class = "leftside">
@@ -14,20 +13,6 @@
             </label>
           </div>
 
-          <div class = "recordbox">
-            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-            <label class="btn" for="btnControl">
-              <div class = "record" :style = "this.record">
-              </div>
-            </label>
-          </div>
-          <div class = "recordbox">
-            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-            <label class="btn" for="btnControl">
-              <div class = "record" :style = "this.record">
-              </div>
-            </label>
-          </div>
           <div class = "recordbox">
             <input @click="togglePlay()"  type="checkbox" id="btnControl" />
             <label class="btn" for="btnControl">
@@ -58,26 +43,58 @@
         </div>
 
       </div>
+      <div class = "themaincontrols">
+        <FuncButton @click="playall()" title = "Play All"/>
+        <audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src=this.songlink> </audio> 
+     <FuncButton @click="shuffle(this.playlists)" title = "Shuffle that Shit" />
+      </div>
+     
+      <div class = "buttsnplays">
      <div class = "buttonbox">
      <SongButton @add-song = "addsong" @skip-the-line="skiptheline" :key = "song.title" v-for="(song) in songs" :song="song"/>
      </div>
-     <FuncButton @click="playall()" title = "Play All"/>
-     <FuncButton @click="shuffle(this.playlists)" title = "Shuffle that Shit" />
-
-
-     <!-- <h3>{{ this.playlists }}</h3> -->
-
-
-    
-    <div class = "playlistwindow">
+     <div class = "playlistwindow">
       <PlayList @delete-song="deletesong" :key = "playlist.id" v-for="(playlist, i) in playlists" :song="playlist" :songorder = "i + 1"  />
     </div>
 
-   
-     <audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src=this.songlink> </audio> 
+    </div>
+
+
+    
+    </div>
+    <div class = "leftside">
+        <div class = cap></div>
+        <div class = "hotbars"> 
+          <div class = "recordbox">
+            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
+            <label class="btn" for="btnControl">
+              <div class = "record" :style = "this.record">
+              </div>
+            </label>
+          </div>
+
+          <div class = "recordbox">
+            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
+            <label class="btn" for="btnControl">
+              <div class = "record" :style = "this.record">
+              </div>
+            </label>
+          </div>
+          <div class = "recordbox">
+            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
+            <label class="btn" for="btnControl">
+              <div class = "record" :style = "this.record">
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class = cap></div>
+      </div>
+
 
     </div>
-    </div>
+    
+
     
  </div>
  </template>
@@ -113,6 +130,7 @@
       songs: [
     {
         title: "The Swingin' Bionic Monster",
+        desc: "An Absolute Banger",
         comp: "Masaru Sato",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -122,6 +140,7 @@
     },
     {
         title: "Bio Wars",
+        desc: "An Absolute Banger",
         comp: "Koichi Sugiyama",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -131,6 +150,7 @@
     },
     {
         title: "Vast Mysteries of the Ocean",
+        desc: "An Absolute Banger",
         comp: "Zane A. Goen",
         arr: "Zane A. Goen",
         voc: "The Groundzero Opera Choir Unit",
@@ -140,6 +160,7 @@
     },
     {
         title: "Prepare for Attack",
+        desc: "An Absolute Banger",
         comp: "Zane A. Goen",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -149,6 +170,7 @@
     },
     {
         title: "on va s'écraser et brûler",
+        desc: "An Absolute Banger",
         comp: "Timothy Steven Clarke",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -158,6 +180,7 @@
     },
     {
         title: "le bâtiment du capitole est en danger!",
+        desc: "An Absolute Banger",
         comp: "Michiru Oshima",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -167,6 +190,7 @@
     },
     {
         title: "la dernière bataille de tokyo contre les monstres",
+        desc: "An Absolute Banger",
         comp: "Timothy Steven Clarke",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -176,6 +200,7 @@
     },
     {
         title: "la guerre est un enfer, mais ça doit se faire",
+        desc: "An Absolute Banger",
         comp: "Shiro SAGISU",
         arr: "Zane A. Goen",
         voc: "The Groundzero Opera Choir Unit, OpheliasAria", 
@@ -186,6 +211,7 @@
 
     {
         title: "godzilla vs the self defense forcese",
+        desc: "An Absolute Banger",
         comp: "Akira Ifukube",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -195,6 +221,7 @@
     },
     {
         title: "Destroy All Monsters",
+        desc: "An Absolute Banger",
         comp: "Akira Ifukube",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -204,6 +231,7 @@
     },
     {
         title: "Deathly Confrontation",
+        desc: "An Absolute Banger",
         comp: "Junko Yokoyama",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -213,6 +241,7 @@
     },
     {
         title: "citation de mitsubishi pavilion I 'volcano'",
+        desc: "An Absolute Banger",
         comp: "Akira Ifukube",
         arr: "Zane A. Goen",
         voc: "---", 
@@ -222,6 +251,7 @@
     },
     {
         title: "a great tragedy has befallen manhattan",
+        desc: "An Absolute Banger",
         comp: "Timothy Steven Clarke",
         arr: "Zane A. Goen",
         voc: "The Groundzero Opera Choir Unit", 
@@ -378,16 +408,21 @@
     margin: 12px;
   }
 
+  audio {
+    color: black;
+    width: 200px;
+    height: 25px;
+}
+
  .thebody {
   width: 95vw;
   margin:auto;
   height:fit-content;
-  border: 7px solid #0e3a28;
-  border-radius: 15px;
   display:flex;
   flex-direction: row;
   justify-content: space-between;
   overflow: hidden;
+  margin-bottom: 30px;
  }
 
  .nowplayingbox {
@@ -411,9 +446,16 @@
  }
 
  .leftside {
-  width: 15%;
+  width: 6%;
   display: flex;
   flex-direction: column;
+ }
+
+ .themaincontrols {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
  }
 
  .cap{
@@ -424,13 +466,19 @@
   height:50px;
  }
  .hotbars {
-  background-color: #202020;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
   z-index: 9;
   justify-content: space-evenly;
+ }
+
+ .buttsnplays {
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
  }
 
  .rightside {
@@ -446,18 +494,20 @@ img {
 }
 
 .buttonbox {
+  width: 48%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   height:400px;
   overflow-y: scroll;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
+  border: 2px solid #138b5a;
 }
 
 .recordbox{
      margin: 0;
-     width:13%;
+     width:40%;
      z-index:10;
     }
   
@@ -555,9 +605,9 @@ img {
   }
 
   .playlistwindow {
-    border:5px solid gold;
-    height: 300px;
-    width: 100ch;
+    border: 2px solid #138b5a;
+    height: 400px;
+    width: 48%;
     overflow-y:scroll;
 
   }
