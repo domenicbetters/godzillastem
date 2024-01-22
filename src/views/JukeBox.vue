@@ -59,7 +59,7 @@
 
       </div>
      <div class = "buttonbox">
-     <SongButton @click="changesong(song.linky, song.title, song.desc, song.comp, song.arr, song.voc, song.lyrwr, song.lyr)" :key = "song.title" v-for="(song) in songs" :song="song"/>
+     <SongButton @add-song = "addsong" @skip-the-line="skiptheline" :key = "song.title" v-for="(song) in songs" :song="song"/>
      </div>
      <FuncButton @click="playall()" title = "Play All"/>
      <FuncButton @click="shuffle(this.playlists)" title = "Shuffle that Shit" />
@@ -113,61 +113,120 @@
       songs: [
     {
         title: "The Swingin' Bionic Monster",
-        desc: "absolute banger",
-        comp: "that one guy",
-        arr: "Zane A Goen",
-        voc: "that guy in hawaiin shirt", 
-        lyrwr: "chubawumba",
-        lyr: "I get knocked down but i get up again youre never gonna keep me down",
+        comp: "Masaru Sato",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/swinging.mp3")
     },
     {
         title: "Bio Wars",
+        comp: "Koichi Sugiyama",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/biowars.mp3")
     },
     {
         title: "Vast Mysteries of the Ocean",
+        comp: "Zane A. Goen",
+        arr: "Zane A. Goen",
+        voc: "The Groundzero Opera Choir Unit",
+        lyrwr: "Scott Avery",
+        lyr: "the end is nigh lest \n we may find a way to overcome it \n there’s no time for muse \n ready the weapons of war for their deadly use against our foe \n shifting eyes betray lies of peace and of harmony \n prepare for attack or die",
         linky: require("@/assets/ocean.mp3")
     },
     {
         title: "Prepare for Attack",
+        comp: "Zane A. Goen",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/prepareforattack.mp3")
     },
     {
         title: "on va s'écraser et brûler",
+        comp: "Timothy Steven Clarke",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/bruler.mp3")
     },
     {
         title: "le bâtiment du capitole est en danger!",
+        comp: "Michiru Oshima",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/capitol.mp3")
     },
     {
         title: "la dernière bataille de tokyo contre les monstres",
+        comp: "Timothy Steven Clarke",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/battledetokyo.mp3")
     },
     {
         title: "la guerre est un enfer, mais ça doit se faire",
+        comp: "Shiro SAGISU",
+        arr: "Zane A. Goen",
+        voc: "The Groundzero Opera Choir Unit, OpheliasAria", 
+        lyrwr: "Mike Wyzgowski",
+        lyr: "Before turmoil comes serenity reflected in your soul to see you through adversityvwar is hell, but it must be Dwell not negative signs, focus your mind to be your guide eternally!",
         linky: require("@/assets/guere.mp3")
     },
 
     {
         title: "godzilla vs the self defense forcese",
+        comp: "Akira Ifukube",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/sdf.mp3")
     },
     {
         title: "Destroy All Monsters",
+        comp: "Akira Ifukube",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/dam.mp3")
     },
     {
         title: "Deathly Confrontation",
+        comp: "Junko Yokoyama",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/confrontation.mp3")
     },
     {
         title: "citation de mitsubishi pavilion I 'volcano'",
+        comp: "Akira Ifukube",
+        arr: "Zane A. Goen",
+        voc: "---", 
+        lyrwr: "---",
+        lyr: "---",
         linky: require("@/assets/volcano.mp3")
     },
     {
         title: "a great tragedy has befallen manhattan",
+        comp: "Timothy Steven Clarke",
+        arr: "Zane A. Goen",
+        voc: "The Groundzero Opera Choir Unit", 
+        lyrwr: "Scott Avery",
+        lyr: "new york, terror full out, warfare how will, man fare no stop, nightmare the cries of the ringing sirens warning citizens missiles falling people dying no hope found",
         linky: require("@/assets/greattragedy.mp3")
     }
 ],
@@ -177,12 +236,18 @@
  
 
    methods: {
-    async changesong(songlinky, songname, songdesc, songcomp, songarr, songvoc, songlyrwr, songlyr) {
+    async addsong(songlinky, songname, songdesc, songcomp, songarr, songvoc, songlyrwr, songlyr) {
       this.playlistsid ++
       this.playlists.push({ id: this.playlistsid, link: songlinky, title: songname, desc: songdesc, comp: songcomp, arr: songarr, voc: songvoc, lyrwr: songlyrwr, lyr: songlyr})
       if(this.playlists.length == 1 ){
       this.switcheroo()
       }
+    },
+
+    async skiptheline(songlinky, songname, songdesc, songcomp, songarr, songvoc, songlyrwr, songlyr) {
+      this.playlistsid ++
+      this.playlists.unshift({ id: this.playlistsid, link: songlinky, title: songname, desc: songdesc, comp: songcomp, arr: songarr, voc: songvoc, lyrwr: songlyrwr, lyr: songlyr})
+      this.switcheroo()
     },
 
     dropdown(){
@@ -242,7 +307,7 @@
     playall() {
       var songs = this.songs
       songs.forEach(song=>{
-        this.changesong(song.linky, song.title, song.desc, song.comp, song.arr, song.voc, song.lyrwr, song.lyr)
+        this.addsong(song.linky, song.title, song.desc, song.comp, song.arr, song.voc, song.lyrwr, song.lyr)
       })
     },
 
@@ -386,6 +451,8 @@ img {
   flex-wrap: wrap;
   height:400px;
   overflow-y: scroll;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .recordbox{
