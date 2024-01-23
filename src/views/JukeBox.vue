@@ -38,7 +38,7 @@
         <h3>{{this.songdesc}}</h3>
         <p>Composer:{{this.songcomp}} | Arranger:{{this.songarr}} | Vocals:{{this.songvoc}} | Lyrics:{{this.songlyrwr}}</p>
         <h4 v-show="!this.lyricshown" @click="dropdown()">Click Here For Lyrics</h4><h4 v-show="this.lyricshown" @click="pickup()">Click Here To Hide Lyrics</h4>
-        <div class = "lyricbox">
+        <div id="lyricbox" class = "lyricbox hidelyrics">
           <p>{{ this.songlyr }}</p>
         </div>
 
@@ -62,7 +62,7 @@
 
     
     </div>
-    <div class = "leftside">
+    <div class  = "leftside mobilemakebyebye">
         <div class = cap></div>
         <div class = "hotbars"> 
           <div class = "recordbox">
@@ -283,10 +283,12 @@
     dropdown(){
       document.getElementById('nowplayingbox').classList.remove('lyricup')
       document.getElementById('nowplayingbox').classList.add('lyricdrop')
+      document.getElementById('lyricbox').classList.remove('hidelyrics')
       this.lyricshown = !this.lyricshown
     },
 
     pickup(){
+      document.getElementById('lyricbox').classList.add('hidelyrics')
       document.getElementById('nowplayingbox').classList.remove('lyricdrop')
       document.getElementById('nowplayingbox').classList.add('lyricup')
       this.lyricshown = !this.lyricshown
@@ -610,6 +612,80 @@ img {
     width: 48%;
     overflow-y:scroll;
 
+  }
+
+
+
+  @media  (max-width: 860.5px) {
+    .mobilemakebyebye {
+      display:none;
+    }
+    .buttsnplays {
+      flex-direction: column;
+    }
+    .buttonbox {
+      width: 98%;
+      margin-bottom: 5px;
+    }
+    .playlistwindow {
+      width: 98%;
+    }
+    h2 {
+      font-size:1.1em;
+    }
+    h3{
+      font-size: .95em;
+    }
+    h4 {
+      font-size: .9em;
+
+    }
+    p{
+      font-size: .75em;
+    }
+    audio {
+      width:120px;
+    }
+    .nowplayingbox {
+      height:200px;
+      
+    }
+    .hidelyrics {
+      display: none;
+    }
+
+    @keyframes lyricdrop{
+      from {
+    height: 200px;
+  }
+  to {
+    height: 420px;
+  }
+  }
+  @-webkit-keyframes lyricdrop {
+    from {
+    height: 200px;
+  }
+  to {
+    height: 420px;
+  }
+  }
+  @keyframes lyricup{
+      from {
+    height: 420px;
+  }
+  to {
+    height: 200px;
+  }
+  }
+  @-webkit-keyframes lyricup {
+    from {
+    height: 420px;
+  }
+  to {
+    height: 200px;
+  }
+  }
   }
 
  

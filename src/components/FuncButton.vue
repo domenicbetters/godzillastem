@@ -25,7 +25,7 @@
   background: rgb(32, 144, 77);
   border-radius: 15px;
   font-family: "VHS";
-  font-size: 1.2em;
+  font-size: .75em;
   color:white;
 
  }
