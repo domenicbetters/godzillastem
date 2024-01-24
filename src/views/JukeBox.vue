@@ -12,31 +12,16 @@
               </div>
             </label>
           </div>
-
-          <div class = "recordbox">
-            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-            <label class="btn" for="btnControl">
-              <div class = "record" :style = "this.record">
-              </div>
-            </label>
-          </div>
-          <div class = "recordbox">
-            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-            <label class="btn" for="btnControl">
-              <div class = "record" :style = "this.record">
-              </div>
-            </label>
-          </div>
         </div>
         <div class = cap></div>
       </div>
 
       <div class="rightside">
      
-      <div id = "nowplayingbox" class = "nowplayingbox">
-        <h2>{{this.songname}}</h2>
-        <h3>{{this.songdesc}}</h3>
-        <p>Composer:{{this.songcomp}} | Arranger:{{this.songarr}} | Vocals:{{this.songvoc}} | Lyrics:{{this.songlyrwr}}</p>
+      <div id = "nowplayingbox" class = "nowplayingbox playboxblink">
+        <h2><marquee  class="blink" scrollamount = "10">{{this.songname}}</marquee></h2>
+        <h3><marquee  class="blink" scrollamount = "10">{{this.songdesc}}</marquee></h3>
+        <p><marquee  class="blink" scrollamount = "10">Composer:{{this.songcomp}} | Arranger:{{this.songarr}} | Vocals:{{this.songvoc}} | Lyrics:{{this.songlyrwr}}</marquee></p>
         <h4 v-show="!this.lyricshown" @click="dropdown()">Click Here For Lyrics</h4><h4 v-show="this.lyricshown" @click="pickup()">Click Here To Hide Lyrics</h4>
         <div id="lyricbox" class = "lyricbox hidelyrics">
           <p>{{ this.songlyr }}</p>
@@ -65,21 +50,7 @@
     <div class  = "leftside mobilemakebyebye">
         <div class = cap></div>
         <div class = "hotbars"> 
-          <div class = "recordbox">
-            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-            <label class="btn" for="btnControl">
-              <div class = "record" :style = "this.record">
-              </div>
-            </label>
-          </div>
-
-          <div class = "recordbox">
-            <input @click="togglePlay()"  type="checkbox" id="btnControl" />
-            <label class="btn" for="btnControl">
-              <div class = "record" :style = "this.record">
-              </div>
-            </label>
-          </div>
+        
           <div class = "recordbox">
             <input @click="togglePlay()"  type="checkbox" id="btnControl" />
             <label class="btn" for="btnControl">
@@ -400,14 +371,13 @@
 
  <style>
   h2 {
-    margin:12px;
-    font-family: "VHS";
+    margin:6px;
   }
   h3 {
-    margin:12px;
+    margin:6px;
   }
   h4{
-    margin: 12px;
+    margin: 6px;
   }
 
   audio {
@@ -428,9 +398,9 @@
  }
 
  .nowplayingbox {
-  border: 2px solid #138b5a;
+  border: 1px solid #144e36;
   width: 95%;
-  height: 180px;
+  height: 143px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -439,6 +409,38 @@
   margin: 15px;
   box-shadow: #0e3a28 0 0 15px 8px;
  }
+
+ .playboxblink {
+  animation: playblink 3.4s linear infinite;
+ }
+
+ @keyframes playblink {
+                0%{
+                  border: 1px solid #144e36;
+                  box-shadow: #0e3a28 0 0 15px 8px;
+                }
+               
+                50%{
+                  border: 1px solid #144e3671;
+                  box-shadow: #0e3a28d8 0 0 15px 8px;
+                }
+              
+                100% {
+                  border: 1px solid #144e36;
+                  box-shadow: #0e3a28 0 0 15px 8px;
+                }
+               
+            }
+
+
+ @keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
  .lyricbox {
   border: 1px solid #29c786;
   width: 85%;
@@ -451,12 +453,15 @@
   width: 6%;
   display: flex;
   flex-direction: column;
+  background: rgb(177,177,181);
+  background: linear-gradient(90deg,rgba(31, 35, 44, 0) 4%, rgb(31, 35, 44) 5%,  rgb(119, 119, 124) 10%, rgb(31, 35, 44) 14%, rgba(49,49,61,1) 15%, rgba(19,20,22,1) 40%, rgba(19,20,22,1) 60%, rgba(49,49,61,1) 85%,  rgb(31, 35, 44) 86%,  rgb(119, 119, 124) 90%, rgb(31, 35, 44) 95%,rgba(31, 35, 44, 0) 100%);
+
  }
 
  .themaincontrols {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
  }
 
@@ -475,6 +480,32 @@
   z-index: 9;
   justify-content: space-evenly;
  }
+
+ .blink {
+                animation: blinker 1.4s linear infinite;
+            }
+
+            @keyframes blinker {
+                0%{
+                  opacity:100;
+                }
+                46%{
+                  opacity:100;
+                }
+                47% {
+                    opacity: 0;
+                }55% {
+                    opacity: 0;
+                }
+                56%{
+                  opacity:100;
+                }
+                100%{
+                  opacity:100;
+                }
+               
+               
+            }
 
  .buttsnplays {
   width:100%;
@@ -543,6 +574,10 @@ img {
        #btnControl ~ label div  {
           border:0px;
       }
+
+      marquee {
+        min-width:100dvw;
+      }
       
  
   /* animation: spin 4s linear infinite; */
@@ -556,7 +591,7 @@ img {
   to {
     background: rgb(19,139,90);
     background: linear-gradient(90deg, rgba(19,139,90,1) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 66%, rgba(19,139,90,1) 100%);
-    box-shadow: 0 0 20px 8px rgb(19,139,90);
+    box-shadow: 0 0 20px 16px rgb(19,139,90);
   }
   }
   @-webkit-keyframes spin {
@@ -569,13 +604,13 @@ img {
   to {
     background: rgb(19,139,90);
   background: linear-gradient(90deg, rgba(19,139,90,1) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 66%, rgba(19,139,90,1) 100%);
-    box-shadow: 0 0 20px 8px rgb(19,139,90);
+    box-shadow: 0 0 20px 16px rgb(19,139,90);
   }
   }
 
   @keyframes lyricdrop{
       from {
-    height: 180px;
+    height: 143px;
   }
   to {
     height: 420px;
@@ -583,7 +618,7 @@ img {
   }
   @-webkit-keyframes lyricdrop {
     from {
-    height: 180px;
+    height: 143px;
   }
   to {
     height: 420px;
@@ -594,7 +629,7 @@ img {
     height: 420px;
   }
   to {
-    height: 180px;
+    height: 143px;
   }
   }
   @-webkit-keyframes lyricup {
@@ -602,7 +637,7 @@ img {
     height: 420px;
   }
   to {
-    height: 180px;
+    height: 143px;
   }
   }
 
@@ -647,43 +682,46 @@ img {
       width:120px;
     }
     .nowplayingbox {
-      height:200px;
+      height:125px;
       
     }
     .hidelyrics {
       display: none;
     }
+    .leftside{
+      width: 15%;
+    }
 
     @keyframes lyricdrop{
       from {
-    height: 200px;
+    height: 125px;
   }
   to {
-    height: 420px;
+    height: 380px;
   }
   }
   @-webkit-keyframes lyricdrop {
     from {
-    height: 200px;
+    height: 125px;
   }
   to {
-    height: 420px;
+    height: 380px;
   }
   }
   @keyframes lyricup{
       from {
-    height: 420px;
+    height: 380px;
   }
   to {
-    height: 200px;
+    height: 125px;
   }
   }
   @-webkit-keyframes lyricup {
     from {
-    height: 420px;
+    height: 380px;
   }
   to {
-    height: 200px;
+    height: 125px;
   }
   }
   }
