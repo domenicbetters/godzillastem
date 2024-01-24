@@ -661,9 +661,11 @@ img {
     .buttonbox {
       width: 98%;
       margin-bottom: 5px;
+      height: 200px;
     }
     .playlistwindow {
       width: 98%;
+      height: 200px;
     }
     h2 {
       font-size:1.1em;

@@ -76,5 +76,12 @@
  p{
   color:white;
  }
-
+ @media  (max-width: 860.5px) {
+  .button-box{
+    height: 25px;
+  }
+ p{
+  font-size: .6em;;
+ }
+ }
 </style>
