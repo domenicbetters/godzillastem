@@ -535,7 +535,10 @@ img {
   overflow-y: scroll;
   justify-content: space-around;
   align-items: center;
-  border: 2px solid #138b5a;
+  border: 2px solid #138b5a; 
+  scrollbar-color: #138b5a rgba(255, 166, 0, 0);
+  scrollbar-width: thin;
+
 }
 
 .recordbox{
@@ -646,6 +649,9 @@ img {
     height: 400px;
     width: 48%;
     overflow-y:scroll;
+    
+  scrollbar-color: #138b5a rgba(255, 166, 0, 0);
+  scrollbar-width: thin;
 
   }
 

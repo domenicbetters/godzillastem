@@ -30,24 +30,32 @@
    .playlistbutton {
     display: flex;
     height:50px;
-    border-bottom:solid 2px rgb(0, 0, 0);
+    border-bottom: 1px dashed rgba(38,183,123,1);
     align-items: center;
     justify-content: space-between;
    }
    .songordernum {
     display: flex;
-    background-color: bisque;
+    background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(41,199,134,1) 100%);
     padding: 3px;
     margin-left: 5px;
     margin-right: 30px;
     height:80%;
     align-items: center;
+    border-radius: 50%;
+    margin-top:3px;
+    margin-bottom: 3px;
    }
    .deleted {
-    background-color: rgb(101, 22, 22);
+    background: rgb(38,183,123);
+background: linear-gradient(180deg, rgba(38,183,123,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 60%, rgba(41,199,134,1) 100%);
     padding: 10px;
     margin-left: 30px;
-    color:white;
-
+    margin-right: 5px;
+    color:rgba(38,183,123,1);
+    font-family:'VHS';
+    border: none;
    }
+   
 </style>
