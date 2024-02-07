@@ -652,6 +652,8 @@ img {
     
   scrollbar-color: #138b5a rgba(255, 166, 0, 0);
   scrollbar-width: thin;
+  background-image: url("../assets/gbackground.png");
+  background-size: cover;
 
   }
 
