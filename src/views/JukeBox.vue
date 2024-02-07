@@ -40,6 +40,13 @@
      </div>
      <div class = "playlistwindow">
       <PlayList @delete-song="deletesong" :key = "playlist.id" v-for="(playlist, i) in playlists" :song="playlist" :songorder = "i + 1"  />
+      <div v-if= "empty <= 0" class = "blanklist"></div> 
+      <div v-if= "empty <= 1" class = "blanklist"></div> 
+      <div v-if= "empty <= 2" class = "blanklist"></div> 
+      <div v-if= "empty <= 3" class = "blanklist"></div> 
+      <div v-if= "empty <= 4" class = "blanklist"></div> 
+      <div v-if= "empty <= 5" class = "blanklist"></div> 
+      <div v-if= "empty <= 6" class = "blanklist"></div>
     </div>
 
     </div>
@@ -98,6 +105,7 @@
       songlyr: '------------',
       playlists: [],
       tracky: 0,
+      empty: 0,
       songs: [
     {
         title: "The Swingin' Bionic Monster",
@@ -239,6 +247,7 @@
    methods: {
     async addsong(songlinky, songname, songdesc, songcomp, songarr, songvoc, songlyrwr, songlyr) {
       this.playlistsid ++
+      this.empty ++
       this.playlists.push({ id: this.playlistsid, link: songlinky, title: songname, desc: songdesc, comp: songcomp, arr: songarr, voc: songvoc, lyrwr: songlyrwr, lyr: songlyr})
       if(this.playlists.length == 1 ){
       this.switcheroo()
@@ -247,6 +256,7 @@
 
     async skiptheline(songlinky, songname, songdesc, songcomp, songarr, songvoc, songlyrwr, songlyr) {
       this.playlistsid ++
+      this.empty ++
       this.playlists.unshift({ id: this.playlistsid, link: songlinky, title: songname, desc: songdesc, comp: songcomp, arr: songarr, voc: songvoc, lyrwr: songlyrwr, lyr: songlyr})
       this.switcheroo()
     },
@@ -327,6 +337,7 @@
     },
 
     itsover(){
+      this.empty --
       this.playlists.shift()
       if (this.playlists.length == 0){
       this.songlink = ""
@@ -343,6 +354,7 @@
     },
 
     deletesong(idnum) {
+      this.empty --
    
       if(this.playlists[0].id == idnum){
         this.playlists = this.playlists.filter((playlist) => playlist.id !== idnum)
@@ -644,6 +656,10 @@ img {
   }
   }
 
+  .blanklist{
+    border-bottom: 2px solid #3c100d;
+    height: 50px;
+  }
   .playlistwindow {
     border: 2px solid #138b5a;
     height: 400px;
@@ -652,7 +668,7 @@ img {
     
   scrollbar-color: #138b5a rgba(255, 166, 0, 0);
   scrollbar-width: thin;
-  background-image: url("../assets/gbackground.png");
+  background-image: url("../assets/StEM_Backdrop01.png");
   background-size: cover;
 
   }
