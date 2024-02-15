@@ -47,18 +47,22 @@
   align-items: center;
  }
  .addbutton {
-  border:2px solid white;
-  height: 36px;
+  border:1px dashed white;
+  height: 26px;
+  background: rgba(0, 0, 0, 0.521);
  }
 
  .playbutton {
-  border:2px solid rgba(255, 255, 255, 0);
-  height: 60px;
+  border:1px dashed white;
+  height: 26px;
+  background: rgba(0, 0, 0, 0.521);
+  margin-right: 3px;
+  margin-left: 1px;
  }
 
  .button-box {
-  margin-top:5px;
-  margin-bottom: 5px;
+  margin-top:8px;
+  margin-bottom: 8px;
   padding:10px;
   padding-right:0px;
   width:230px;
@@ -68,8 +72,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-left:1px;
+  margin-right:1px;
   background: rgb(14,58,40);
-  background: linear-gradient(180deg, rgba(14,58,40,0) 0%, rgba(14,58,40,0.40) 20%, rgba(41,199,134,0.6) 40%, rgba(38,182,123,0.6) 60%, rgba(14,58,40,0.40) 80%, rgba(14,58,40,0) 100%);
+  background: linear-gradient(180deg, rgba(14,58,40,0) 0%, rgba(14,58,40,0.15) 20%, rgba(41,199,134,0.3) 40%, rgba(38,182,123,0.3) 60%, rgba(14,58,40,0.15) 80%, rgba(14,58,40,0) 100%);
   box-shadow: -6px 0 5px 2px rgba(255, 255, 255, 0.704);
  }
 
