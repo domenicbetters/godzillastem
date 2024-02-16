@@ -72,8 +72,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-left:1px;
-  margin-right:1px;
+  margin-left:2px;
+  margin-right:2px;
   background: rgb(14,58,40);
   background: linear-gradient(180deg, rgba(14,58,40,0) 0%, rgba(14,58,40,0.15) 20%, rgba(41,199,134,0.3) 40%, rgba(38,182,123,0.3) 60%, rgba(14,58,40,0.15) 80%, rgba(14,58,40,0) 100%);
   box-shadow: -6px 0 5px 2px rgba(255, 255, 255, 0.704);
@@ -90,4 +90,6 @@
   font-size: .6em;;
  }
  }
+
+ 
 </style>

@@ -2,7 +2,7 @@
     <div id="app">
     <div class = "thebody">
       
-      <div class = "leftside">
+      <div class = "leftside scale-up-center">
         <div class = cap></div>
         <div class = "hotbars"> 
           <div class = "recordbox">
@@ -29,16 +29,16 @@
 
       </div>
       <div class = "themaincontrols">
-        <FuncButton @click="playall()" title = "Play All"/>
-        <audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src=this.songlink> </audio> 
-     <FuncButton @click="shuffle(this.playlists)" title = "Shuffle that Shit" />
+        <FuncButton class="slide-left" @click="playall()" title = "Play All"/>
+        <FuncButton  @click="togglePlay()" title = "PLAY / PAUSE"/><audio @play = "checkplay" @pause = "checkpause" @ended="itsover" :key="this.tracky" controls  id="audioplayer"  autoplay class = "playbutton"  > <source :src=this.songlink> </audio> 
+     <FuncButton class="slide-right" @click="shuffle(this.playlists)" title = "Shuffle that Shit" />
       </div>
      
       <div class = "buttsnplays">
-     <div class = "buttonbox">
+     <div class = "buttonbox playboxblink">
      <SongButton @add-song = "addsong" @skip-the-line="skiptheline" :key = "song.title" v-for="(song) in songs" :song="song"/>
      </div>
-     <div class = "playlistwindow">
+     <div class = "playlistwindow playboxblink">
       <PlayList @delete-song="deletesong" :key = "playlist.id" v-for="(playlist, i) in playlists" :song="playlist" :songorder = "i + 1"  />
       <div v-if= "empty <= 0" class = "blanklist"></div> 
       <div v-if= "empty <= 1" class = "blanklist"></div> 
@@ -54,7 +54,7 @@
 
     
     </div>
-    <div class  = "leftside mobilemakebyebye">
+    <div class  = "leftside  scale-up-center mobilemakebyebye">
         <div class = cap></div>
         <div class = "hotbars"> 
         
@@ -393,7 +393,7 @@
   }
 
   audio {
-    color: black;
+    display:none;
     width: 200px;
     height: 25px;
 }
@@ -593,6 +593,8 @@ img {
       marquee {
         min-width:100dvw;
       }
+
+   
       
  
   /* animation: spin 4s linear infinite; */
@@ -673,6 +675,46 @@ img {
 
   }
 
+  .scale-up-center {
+        animation: scale-up-center 6s cubic-bezier(0.390, 0.575, 0.565, 1.000)  forwards;
+        }
+        @keyframes scale-up-center {
+  0% {
+            transform: scale(0.75);
+            opacity: 0;
+  }
+  100% {
+            transform: scale(1);
+            opacity: 1;
+  }
+}
+
+.slide-right {
+	animation: slide-right 2s ease-in reverse both;
+}
+@keyframes slide-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(200px);
+  }
+}
+
+.slide-left {
+	animation: slide-left 2s ease-in reverse both;
+}
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-200px);
+  }
+}
+
+  
+
 
 
   @media  (max-width: 860.5px) {
@@ -751,6 +793,7 @@ img {
   }
   }
   }
+  
 
  
 
